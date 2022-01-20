@@ -11,7 +11,7 @@ namespace WinTail
 	{
 		public static ActorSystem MyActorSystem;
 
-		static async Task Main(string[] args)
+		static void Main(string[] args)
 		{
 			// initialize MyActorSystem
 			MyActorSystem = ActorSystem.Create("MyActorSystem");
@@ -28,7 +28,7 @@ namespace WinTail
 
 			// blocks the main thread from exiting until the actor system is shut down
 			//MyActorSystem.Settings.CoordinatedShutdownTerminateActorSystem = false;
-			await MyActorSystem.Terminate();  //.AwaitTermination();
+			MyActorSystem.WhenTerminated.Wait();  //.AwaitTermination();
 		}
 
 		private static void PrintInstructions()
