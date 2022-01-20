@@ -52,6 +52,8 @@ namespace WinTail
 				if (valid)
 				{
 					_consoleWriterActor.Tell(new InputSuccess("Thank you! Message was valid."));
+
+					Self.Tell(new ContinueProcessing());
 				}
 				else
 				{
