@@ -1,4 +1,4 @@
-namespace WinTail
+﻿namespace WinTail
 
 open System
 open Akka.Actor
@@ -16,7 +16,6 @@ module Actors =
         | "exit" -> Exit
         | _ -> Message(str)
 
-
     let consoleReaderActor (consoleWriter: IActorRef) (mailbox: Actor<_>) message = 
         let line = Console.ReadLine ()
         match line with
@@ -27,6 +26,7 @@ module Actors =
 
             // continue reading messages from the console
             // YOU NEED TO FILL IN HERE
+            ()
 
     let consoleWriterActor message = 
         let (|Even|Odd|) n = if n % 2 = 0 then Even else Odd
