@@ -10,7 +10,7 @@ namespace WinTail
 	class ConsoleReaderActor : UntypedActor
 	{
 		public const string ExitCommand = "exit";
-		private IActorRef _consoleWriterActor;
+		private readonly IActorRef _consoleWriterActor;
 
 		public ConsoleReaderActor(IActorRef consoleWriterActor)
 		{
