@@ -1,5 +1,4 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 
 namespace WinTail
 {
@@ -62,8 +61,7 @@ namespace WinTail
 			}
 		}
 
-		private bool IsValid(string message) =>
-			message.Length % 2 == 0;
+		private bool IsValid(string message) => message.Length % 2 == 0;
 
 		private void DoPrintInstructions()
 		{

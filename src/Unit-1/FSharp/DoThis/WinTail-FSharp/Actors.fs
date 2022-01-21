@@ -6,10 +6,10 @@ open Akka.FSharp
 open Messages
 
 type Command = 
-| Start
-| Continue
-| Message of string
-| Exit
+    | Start
+    | Continue
+    | Message of string
+    | Exit
 
 let (|Message|Exit|) (str:string) =
     match str.ToLower() with

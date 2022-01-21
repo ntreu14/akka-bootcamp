@@ -1,15 +1,10 @@
-﻿using System;
-using Akka.Actor;
-using Akka.Actor.Setup;
-using Akka.Configuration;
-using Akka.Util;
+﻿using Akka.Actor;
 
 namespace WinTail
 {
-	#region Program
 	class Program
 	{
-		public static ActorSystem MyActorSystem;
+		public static ActorSystem? MyActorSystem;
 
 		static void Main(string[] args)
 		{
@@ -26,5 +21,4 @@ namespace WinTail
 			MyActorSystem.WhenTerminated.Wait();
 		}
 	}
-	#endregion
 }
