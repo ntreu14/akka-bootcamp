@@ -41,7 +41,7 @@ let consoleReaderActor (validation: IActorRef) (mailbox: Actor<_>) message =
 let consoleWriterActor message = 
     let printInColor color message =
         Console.ForegroundColor <- color
-        Console.WriteLine (message.ToString ())
+        message.ToString () |> Console.WriteLine
         Console.ResetColor ()
 
     match box message with
