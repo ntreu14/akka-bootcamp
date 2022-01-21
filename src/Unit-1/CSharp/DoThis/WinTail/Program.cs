@@ -2,10 +2,9 @@
 
 namespace WinTail
 {
-	#region Program
 	class Program
 	{
-		public static ActorSystem MyActorSystem;
+		public static ActorSystem? MyActorSystem;
 
 		static void Main(string[] args)
 		{
@@ -41,5 +40,4 @@ namespace WinTail
 			Console.WriteLine("Type 'exit' to quit this application at any time.\n");
 		}
 	}
-	#endregion
 }

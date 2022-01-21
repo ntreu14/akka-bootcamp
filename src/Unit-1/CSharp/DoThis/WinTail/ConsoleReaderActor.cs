@@ -1,5 +1,4 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 
 namespace WinTail
 {
@@ -7,7 +6,7 @@ namespace WinTail
 	/// Actor responsible for reading FROM the console. 
 	/// Also responsible for calling <see cref="ActorSystem.Shutdown"/>.
 	/// </summary>
-	class ConsoleReaderActor : UntypedActor
+	public class ConsoleReaderActor : UntypedActor
 	{
 		public const string ExitCommand = "exit";
 		private readonly IActorRef _consoleWriterActor;

@@ -1,5 +1,4 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 
 namespace WinTail
 {
@@ -7,7 +6,7 @@ namespace WinTail
 	/// Actor responsible for serializing message writes to the console.
 	/// (write one message at a time, champ :)
 	/// </summary>
-	class ConsoleWriterActor : UntypedActor
+	public class ConsoleWriterActor : UntypedActor
 	{
 		protected override void OnReceive(object message)
 		{
@@ -28,7 +27,6 @@ namespace WinTail
 			Console.ForegroundColor = color;
 			Console.WriteLine(alert);
 			Console.ResetColor();
-
 		}
 	}
 }
