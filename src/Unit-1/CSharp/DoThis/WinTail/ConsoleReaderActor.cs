@@ -1,5 +1,4 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 
 namespace WinTail
 {
@@ -11,11 +10,11 @@ namespace WinTail
 	{
 		public const string StartCommand = "start";
 		public const string ExitCommand = "exit";
-		private IActorRef _consoleWriterActor;
+		private readonly IActorRef _validationActor;
 
 		public ConsoleReaderActor(IActorRef consoleWriterActor)
 		{
-			_consoleWriterActor = consoleWriterActor;
+			_validationActor = consoleWriterActor;
 		}
 
 		protected override void OnReceive(object message)
@@ -24,46 +23,23 @@ namespace WinTail
 			{
 				DoPrintInstructions();
 			}
-			else if (message is InputError error)
-			{
-				_consoleWriterActor.Tell(error);
-			}
-
+			
 			GetAndValidateInput();
 		}
 
 		private void GetAndValidateInput()
 		{
 			var message = Console.ReadLine();
-			if (string.IsNullOrEmpty(message))
-			{
-				// signal that the user needs to supply an input, as previously
-				// received input was blank
-				Self.Tell(new NullInputError("No input received."));
-			}
-			else if (string.Equals(message, ExitCommand, StringComparison.OrdinalIgnoreCase))
+			if (!string.IsNullOrEmpty(message) && string.Equals(message, ExitCommand, StringComparison.OrdinalIgnoreCase))
 			{
 				// shut down the entire actor system (allows the process to exit)
 				Context.System.Terminate();
+				return;
 			}
-			else
-			{
-				var valid = IsValid(message);
-				if (valid)
-				{
-					_consoleWriterActor.Tell(new InputSuccess("Thank you! Message was valid."));
 
-					Self.Tell(new ContinueProcessing());
-				}
-				else
-				{
-					Self.Tell(new ValidationError("Invalid: Input had off number  of characters"));
-				}
-			}
+			// otherwise, just hand message off to validation actor (by telling its actor ref)
+			_validationActor.Tell(message);
 		}
-
-		private bool IsValid(string message) =>
-			message.Length % 2 == 0;
 
 		private void DoPrintInstructions()
 		{
