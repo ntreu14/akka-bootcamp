@@ -12,9 +12,9 @@ namespace WinTail
 		public const string ExitCommand = "exit";
 		private readonly IActorRef _validationActor;
 
-		public ConsoleReaderActor(IActorRef consoleWriterActor)
+		public ConsoleReaderActor(IActorRef validationActor)
 		{
-			_validationActor = consoleWriterActor;
+			_validationActor = validationActor;
 		}
 
 		protected override void OnReceive(object message)
