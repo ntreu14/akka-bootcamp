@@ -1,8 +1,4 @@
-﻿using System;
-using Akka.Actor;
-using Akka.Actor.Setup;
-using Akka.Configuration;
-using Akka.Util;
+﻿using Akka.Actor;
 
 namespace WinTail
 {
@@ -11,7 +7,7 @@ namespace WinTail
 	{
 		public static ActorSystem MyActorSystem;
 
-		static async Task Main(string[] args)
+		static void Main(string[] args)
 		{
 			// initialize MyActorSystem
 			MyActorSystem = ActorSystem.Create("MyActorSystem");
@@ -23,12 +19,10 @@ namespace WinTail
 
 
 			// tell console reader to begin
-			//YOU NEED TO FILL IN HERE
 			consoleReaderActor.Tell("start");
 
 			// blocks the main thread from exiting until the actor system is shut down
-			//MyActorSystem.Settings.CoordinatedShutdownTerminateActorSystem = false;
-			await MyActorSystem.Terminate();  //.AwaitTermination();
+			MyActorSystem.WhenTerminated.Wait(); 
 		}
 
 		private static void PrintInstructions()

@@ -14,3 +14,4 @@ let consoleReaderActor =
     |> spawn myActorSystem "conosleWriterActor"
 
 consoleReaderActor <! Actors.Start
+myActorSystem.WhenTerminated.Wait ()
