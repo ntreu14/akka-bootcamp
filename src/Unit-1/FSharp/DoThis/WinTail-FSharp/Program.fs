@@ -1,12 +1,18 @@
 ﻿open Akka.FSharp
 
-let myActorSystem = System.create "MyActorSystem" <| Configuration.load ()
+let myActorSystem = 
+    System.create "MyActorSystem" <| Configuration.load ()
 
 let consoleWriterActor = 
     spawn myActorSystem "consoleWriterActor" <| actorOf Actors.consoleWriterActor
 
+let validationActor =
+    Actors.validationActor consoleWriterActor
+    |> actorOf2
+    |> spawn myActorSystem "validationActor"
+
 let consoleReaderActor = 
-    Actors.consoleReaderActor consoleWriterActor
+    Actors.consoleReaderActor validationActor
     |> actorOf2
     |> spawn myActorSystem "conosleWriterActor"
 
